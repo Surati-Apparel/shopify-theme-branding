@@ -1,0 +1,70 @@
+{% assign show_read_more_read_less = true %}
+{% assign show_collection_description = true %}
+{% assign word_number = 50 %}
+
+{% if show_read_more_read_less %}
+<div class="collection-description-container">
+    <!-- Short Description (initially visible) -->
+    <div id="shortDesc">
+        {{ collection.description | truncatewords: word_number }} <!-- Adjust word count as needed -->
+    </div>
+  
+    <button id="readMore">Read More</button>
+
+    <!-- Long Description (initially hidden) -->
+    <div id="longDesc">
+        {{ collection.description }} <!-- Show remaining text -->
+        <button id="readLess" style="display: none;">Read Less</button>
+    </div>
+</div>
+{% endif %}
+
+<style>
+  /* Styles for the buttons */
+  .collection-description-container {
+    padding: 5px;
+  }
+  #readMore, #readLess {
+    background: none; /* Remove button background */
+    border: none; /* Remove button border */
+    color: #242F66; /* Change this color to your preference */
+    font-weight: 500! important;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0; /* Remove padding for inline appearance */
+    font: inherit; /* Inherit font styles from parent element */
+    margin-top: 10px; /* Add margin for spacing */
+  }
+  #readMore:hover, #readLess:hover {
+    font-weight: 600! important;
+  }
+  
+  #longDesc, #readLess {
+    display: none;
+    
+  }
+</style>
+
+<script>
+  // Function to show the long description and toggle buttons
+  function showLongDesc() {
+    document.getElementById("longDesc").style.display = "block"; // Show long description
+    document.getElementById("shortDesc").style.display = "none"; // Show long description
+    document.getElementById("readMore").style.display = "none"; // Hide Read More button
+    document.getElementById("readLess").style.display = "block"; // Show Read Less button
+  }
+
+  // Function to hide the long description and toggle buttons
+  function hideLongDesc() {
+    document.getElementById("longDesc").style.display = "none"; // Hide long description
+    document.getElementById("readLess").style.display = "none"; // Hide Read Less button
+    document.getElementById("shortDesc").style.display = "block"; // Show long description
+    document.getElementById("readMore").style.display = "block"; // Show Read More button
+    document.getElementById("readMore").focus(); // Set focus back to Read More button
+  }
+
+  // Attach click events to the buttons
+  document.getElementById("readMore").addEventListener("click", showLongDesc);
+  document.getElementById("readLess").addEventListener("click", hideLongDesc);
+</script>
+
