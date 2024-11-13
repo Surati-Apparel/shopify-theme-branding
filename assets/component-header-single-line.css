@@ -9,6 +9,9 @@
 
 .header-single-line {
 	background: var(--bg-color);
+	background: red;
+	background: yellow;
+	background: pink;
 	padding-top: var(--padding-top);
 	padding-bottom: var(--padding-bottom);
 }
